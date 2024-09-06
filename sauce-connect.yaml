@@ -15,7 +15,7 @@ region: us-west
 #
 # Name of the tunnel or tunnel pool. You can run tests using this tunnel by
 # specifying the tunnelName value in your test capabilities.
-tunnel-name: docker-compose-tunnel
+tunnel-name: docker-proxy-sauce-tunnel
 
 # username <username>
 #
@@ -86,7 +86,7 @@ tunnel-domains: .saucelabs.com
 # Site or upstream proxy basic authentication credentials. The host and port can
 # be set to "*" to match all hosts and ports respectively. The flag can be
 # specified multiple times to add multiple credentials.
-#auth: proxyuser:$PROXY_PASSWD@squidproxy01:3128,proxyuser:$PROXY_PASSWD@squidproxy02:3128
+auth: proxyuser:$PROXY_PASSWD@squidproxy01:3128
 
 # header <header>
 #
@@ -103,7 +103,7 @@ tunnel-domains: .saucelabs.com
 # Proxy Auto-Configuration file to use for upstream proxy selection. It can be a
 # local file or a URL, you can also use '-' to read from stdin. The data URI
 # scheme is supported, the format is data:base64,<encoded data>.
-#pac: 
+pac: /opt/proxy.pac
 
 # proxy [protocol://]host[:port]
 #
@@ -121,9 +121,9 @@ tunnel-domains: .saucelabs.com
 # upstream proxy. Setting this to direct sends requests to localhost directly
 # without using the upstream proxy. By default, requests to localhost are
 # denied.
-#proxy-localhost: deny
+proxy-localhost: deny
 
-# proxy-sauce [protocol://]host[:port]
+proxy-sauce: http://localhost:3128
 #
 # Proxy for requests to Sauce Labs REST API and Sauce Connect servers only. See
 # the -x, --proxy flag for more details on the format.
@@ -213,7 +213,7 @@ tunnel-domains: .saucelabs.com
 # The short-url mode logs [scheme://]host[/path] instead of the full URL. The
 # error mode logs request line and headers if status code is greater than or
 # equal to 500.
-#log-http: 
+log-http: proxy:url
 
 # log-level <error|info|debug>
 #
