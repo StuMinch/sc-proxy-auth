@@ -1,29 +1,29 @@
 version: "3"
 services:
-  squidproxy01:
+  cloudproxy:
     image: "ubuntu/squid"
     command: ""
     extra_hosts:
-    - "squidproxy01:127.0.0.1"
-    - "squidproxy02:127.0.0.1"
+    - "cloudproxy:127.0.0.1"
+    - "internalproxy:127.0.0.1"
     ports:
     - "3128:3128"
     network_mode: host
     volumes: 
-      - ./proxy01_squid.conf:/etc/squid/squid.conf
+      - ./cloudproxy_squid.conf:/etc/squid/squid.conf
       - ./passwd:/etc/squid/passwd
 
-  squidproxy02:
+  internalproxy:
     image: "ubuntu/squid"
     command: ""
     extra_hosts:
-    - "squidproxy01:127.0.0.1"
-    - "squidproxy02:127.0.0.1"
+    - "cloudproxy:127.0.0.1"
+    - "internalproxy:127.0.0.1"
     ports:
     - "3129:3129"
     network_mode: host
     volumes: 
-      - ./proxy02_squid.conf:/etc/squid/squid.conf
+      - ./internalproxy_squid.conf:/etc/squid/squid.conf
       - ./passwd:/etc/squid/passwd
 
   sauce-connect:
@@ -35,8 +35,8 @@ services:
     command: "run -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -c /opt/sauce-connect.yaml"
     network_mode: host
     extra_hosts:
-    - "squidproxy01:127.0.0.1"
-    - "squidproxy02:127.0.0.1"
+    - "cloudproxy:127.0.0.1"
+    - "internalproxy:127.0.0.1"
     volumes: 
       - ./sauce-connect.yaml:/opt/sauce-connect.yaml
       - ./proxy.pac:/opt/proxy.pac

@@ -86,7 +86,7 @@ tunnel-pool: true
 # Site or upstream proxy basic authentication credentials. The host and port can
 # be set to "*" to match all hosts and ports respectively. The flag can be
 # specified multiple times to add multiple credentials.
-auth: proxyuser:$PROXY_PASSWD@squidproxy01:3128
+auth: proxyuser:$PROXY_PASSWD@cloudproxy:3128
 
 # header <header>
 #
@@ -123,11 +123,10 @@ pac: /opt/proxy.pac
 # denied.
 proxy-localhost: allow
 
-proxy-sauce: http://localhost:3128
 #
 # Proxy for requests to Sauce Labs REST API and Sauce Connect servers only. See
 # the -x, --proxy flag for more details on the format.
-#proxy-sauce: 
+proxy-sauce: http://cloudproxy:3128
 
 # --- DNS ---
 
