@@ -34,12 +34,12 @@ tunnel-name: docker-proxy-sauce-tunnel
 #
 # Share the tunnel within the same org unit. Only the 'all' option is currently
 # supported.
-#shared: 
+shared: all 
 
 # tunnel-pool <value>
 #
 # Denotes a tunnel as part of a high availability tunnel pool.
-#tunnel-pool: false
+tunnel-pool: true
 
 # --- Tunnel traffic ---
 
@@ -77,7 +77,7 @@ tunnel-name: docker-proxy-sauce-tunnel
 # since it minimizes the expensive tunnelled traffic and uses it only for
 # internal domains that are not publicly available. You can specify
 # --tunnel-domains or --direct-domains, but not both.
-tunnel-domains: .saucelabs.com
+#tunnel-domains: .saucelabs.com
 
 # --- Proxy ---
 
@@ -121,7 +121,7 @@ pac: /opt/proxy.pac
 # upstream proxy. Setting this to direct sends requests to localhost directly
 # without using the upstream proxy. By default, requests to localhost are
 # denied.
-proxy-localhost: deny
+proxy-localhost: allow
 
 proxy-sauce: http://localhost:3128
 #
